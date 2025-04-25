@@ -357,11 +357,12 @@ export function convertCohereMessages(messages, names) {
 /**
  * Convert a prompt from the ChatML objects to the format used by Google MakerSuite models.
  * @param {object[]} messages Array of messages
- * @param {string} model Model name
+ * @param {string} _model Model name
  * @param {boolean} useSysPrompt Use system prompt
  * @param {PromptNames} names Prompt names
  * @returns {{contents: *[], system_instruction: {parts: {text: string}[]}}} Prompt for Google MakerSuite models
  */
+<<<<<<< HEAD
 export function convertGooglePrompt(messages, model, useSysPrompt, names) {
     const visionSupportedModelPrefix = [
         'gemini-1.5',
@@ -374,6 +375,9 @@ export function convertGooglePrompt(messages, model, useSysPrompt, names) {
 
 <<<<<<< HEAD
     const isMultimodal = visionSupportedModels.includes(model);
+=======
+export function convertGooglePrompt(messages, _model, useSysPrompt, names) {
+>>>>>>> e621f0d96 (Remove model name check in convertGooglePrompt)
     const sysPrompt = [];
 =======
     const isMultimodal = visionSupportedModelPrefix.some(prefix => model.startsWith(prefix));
@@ -476,7 +480,7 @@ export function convertGooglePrompt(messages, model, useSysPrompt, names) {
 
                     toolNameMap[toolCall.id] = toolCall.function.name;
                 });
-            } else if (part.type === 'image_url' && isMultimodal) {
+            } else if (part.type === 'image_url') {
                 const mimeType = part.image_url.url.split(';')[0].split(':')[1];
                 const base64Data = part.image_url.url.split(',')[1];
                 parts.push({
